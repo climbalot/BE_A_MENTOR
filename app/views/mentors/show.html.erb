@@ -1,7 +1,7 @@
 <div class="container pt-4">
   <div class="profile-banner">
     <div>
-      <img class="avatar-large pb-3" alt="avatar-large" src="https://kitt.lewagon.com/placeholder/users/arthur-littm" />
+      <%= cl_image_tag @mentor.user.photo.key, height: 300, width: 300, crop: :fill, class: "avatar-large pb-3", alt: "avatar-large" %>
       <p class="text-center">Rating:</p>
     </div>
     <div class="pl-5">
