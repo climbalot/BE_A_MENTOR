@@ -12,7 +12,7 @@ require 'faker'
 User.destroy_all
 Mentor.destroy_all
 Topic.destroy_all
-MentorTopic.destroy_all 
+MentorTopic.destroy_all
 p "Finished cleaning the database"
 
 # seeding industries
@@ -37,7 +37,7 @@ array = []
     password: Faker::Internet.password)
     user.save!
     p "Created #{user.name}"
-    array << user 
+    array << user
     p "Added user to array"
 }
 
