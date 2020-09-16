@@ -3,11 +3,10 @@ require 'time'
 class BookingsController < ApplicationController
     def create
         @mentor = Mentor.find(params[:mentor_id])
-        @user = @mentor.user 
         convert_time_to_duration()
         @price = (@mentor.hourly_rate / 60) * @duration
         @booking = Booking.new(booking_params)
-        @booking.user = @user 
+        @booking.user = current_user
         @booking.mentor = @mentor 
         @booking.duration_in_minutes = @duration 
         @booking.total_price = @price
@@ -22,6 +21,9 @@ class BookingsController < ApplicationController
         else 
             redirect_to mentor_path(@mentor, tab: 'booking'), alert: "Your booking was unsuccessful, please try again."
         end
+
+        # verification
+        authorize @booking
     end
 
     private 
