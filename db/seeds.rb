@@ -7,10 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
+require 'open-uri'
 
 # clean up db
-User.destroy_all
 Mentor.destroy_all
+User.destroy_all
 Topic.destroy_all
 MentorTopic.destroy_all
 p "Finished cleaning the database"
@@ -34,12 +35,15 @@ array = []
     experience_years: Faker::Number.between(from: 1, to: 10),
     job_title: Faker::Job.title,
     email: Faker::Internet.email,
-    password: Faker::Internet.password)
+    password: Faker::Internet.password,)
+    file = URI.open("https://kitt.lewagon.com/placeholder/users/random")
+    user.photo.attach(io: file, filename: 'avatar.png')
     user.save!
     p "Created #{user.name}"
     array << user
     p "Added user to array"
 }
+
 
 
 # seeding Mentors

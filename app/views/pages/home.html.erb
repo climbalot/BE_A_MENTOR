@@ -1,8 +1,7 @@
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1554200876-56c2f25224fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80);">
   <div class="container">
-    <h1>Le Wagon brings <strong>tech skills</strong> to <strong>creative people</strong>!</h1>
-    <p>Change your life and learn to code at one of our campuses around the world.</p>
-    <a class="btn btn-primary" href="#">Apply now</a>
+    <h1>Mentoring, made easier! Buy a mentor!</h1>
+    <p>Change your life and learn by meeting a mentor from somewhere around the world.</p>
   </div>
 </div>
 <% if user_signed_in? %>
@@ -17,18 +16,18 @@
 <div class="container text-center">
   <div class="cards">
     <% @mentors.each do |mentor| %>
-      <%= link_to mentor_path(mentor) do %>
-        <div class="card" style="width: 18rem;">
-          <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" class="card-img-top card-img" alt="...">
-          <div class="card-body text-left">
-            <h5 class="card-title"><%= mentor.user.name %></h5>
-            <div class="d-flex justify-content-between align-items-center">
-              <h6 class="text-muted"><%= mentor.user.job_title %></h6>
-              <h6><strong>$<%= mentor.hourly_rate %>/hr</strong></h6>
-            </div>
-          </div>
+    <%= link_to mentor_path(mentor) do %>
+    <div class="card" style="width: 18rem;">
+      <%= cl_image_tag mentor.user.photo.key, class: "card-img-top card-img", alt: "profile_img" %>
+      <div class="card-body text-left">
+        <h5 class="card-title"><%= mentor.user.name %></h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <h6 class="text-muted"><%= mentor.user.job_title %></h6>
+          <h6><strong>$<%= mentor.hourly_rate %>/hr</strong></h6>
         </div>
-      <% end %>
+      </div>
+    </div>
+    <% end %>
     <% end %>
   </div>
 </div>
