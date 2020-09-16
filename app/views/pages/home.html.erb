@@ -4,7 +4,9 @@
     <p>Change your life and learn by meeting a mentor from somewhere around the world.</p>
   </div>
 </div>
-
+<% if user_signed_in? %>
+<%= current_user.email %>
+<% end %>
 <div class="container d-flex align-items-center" id="filter-bar">
   <%= render 'filter_bar' %>
 </div>
