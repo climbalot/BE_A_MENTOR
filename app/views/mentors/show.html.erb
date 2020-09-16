@@ -1,7 +1,7 @@
 <div class="container-fluid d-flex align-items-center user-profile-top">
     <div class="container pt-4 d-flex justify-content-left align-items-center">
         <div class="description-wrapper mr-3">
-            <img class= "avatar-large" src="https://images.unsplash.com/photo-1558898479-33c0057a5d12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
+            <%= cl_image_tag @user.photo.key, class: "avatar-large", alt: "profile_img" %>
             <p class="text-center">Rating:</p>
         </div>
         <div class="profile">
