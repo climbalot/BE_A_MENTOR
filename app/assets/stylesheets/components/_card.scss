@@ -1,0 +1,15 @@
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
+
+.card-img {
+  height: 300px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card {
+  border-radius: 8px;
+}
