@@ -10,21 +10,23 @@
   <%= render 'filter_bar' %>
 </div>
 
-<h2 class="text-center mt-5">Meet your mentors!</h2>
+<h2 class="text-center">Meet your mentors!</h2>
 
 <div class="container text-center">
   <div class="cards">
     <% @mentors.each do |mentor| %>
-    <div class="card" style="width: 18rem;">
-      <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" class="card-img-top card-img" alt="...">
-      <div class="card-body text-left">
-        <h5 class="card-title"><%= mentor.user.name %></h5>
-        <div class="d-flex justify-content-between align-items-center">
-          <h6 class="card-subtitle text-muted"><%= mentor.user.job_title %></h6>
-          <h6><strong>$<%= mentor.hourly_rate %>/hr</strong></h6>
+      <%= link_to mentor_path(mentor) do %>
+        <div class="card" style="width: 18rem;">
+          <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" class="card-img-top card-img" alt="...">
+          <div class="card-body text-left">
+            <h5 class="card-title"><%= mentor.user.name %></h5>
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="text-muted"><%= mentor.user.job_title %></h6>
+              <h6><strong>$<%= mentor.hourly_rate %>/hr</strong></h6>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      <% end %>
     <% end %>
   </div>
 </div>
