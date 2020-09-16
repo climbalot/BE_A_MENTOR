@@ -1,40 +1,52 @@
-<div class="container pt-4">
-  <div class="profile-banner">
-    <div>
-      <%= cl_image_tag @mentor.user.photo.key, height: 300, width: 300, crop: :fill, class: "avatar-large pb-3", alt: "avatar-large" %>
-      <p class="text-center">Rating:</p>
+<div class="container-fluid d-flex align-items-center user-profile-top">
+    <div class="container pt-4 d-flex justify-content-left align-items-center">
+        <div class="description-wrapper mr-3">
+            <img class= "avatar-large" src="https://images.unsplash.com/photo-1558898479-33c0057a5d12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
+            <p class="text-center">Rating:</p>
+        </div>
+        <div class="profile">
+            <h3><%= @user.name %></h3>
+            <i class="fas fa-map-marker-alt"></i> <%= @user.location %>
+            <h4><%= @user.job_title %></h4>
+            <p>Works in the <%= @user.industry.industry_name %> industry</p>
+        </div>
     </div>
-    <div class="pl-5">
-      <h4><%= @mentor.user.name %></h4>
-      <h5><%= @mentor.user.job_title %></h5>
-      <p><%= @mentor.user.description %></p>
-      <p><%= @mentor.user.location %></p>
-    </div>
-  </div>
 </div>
-<div class="more-info">
-  <div class="profile-display">
 
-    <h6><strong>profile</strong></h6>
-    <h6><strong>bookings</strong></h6>
-  </div>
-  <div class="profile-display ">
-    <div class="info-text">
-      <h3>About Me</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-       Morbi sit amet malesuada nulla. Proin in tellus eget ante lobortis finibus quis ornare augue.
-       In odio urna, dapibus in nisl et, volutpat blandit mauris. Proin consequat sollicitudin semper.
-       Donec quis erat lacus. Maecenas hendrerit risus et dictum semper. Nunc et enim eros. Aenean vitae elit vitae nisi dictum semper.
-       Sed quis sem sem. Morbi volutpat ultrices nulla at ullamcorper. Nullam diam elit, vulputate nec ante nec, blandit dapibus nibh.
-       Quisque semper dolor id risus efficitur egestas. Morbi viverra tellus vitae nunc sollicitudin, at tincidunt mi interdum.
-     Fusce ornare interdum ultricies. Pellentesque.</p>
-   </div>
-   <div class="info-text">
-     <h3>Education</h3>
-     <%= @mentor.user.education %>
-   </div>
- </div>
-</div>
-<div>
-  <h3>Book this mentor!</h3>
+<div class="container pt-4">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link <%= @tab == "profile" || @tab == nil ? "active" : "" %>" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link <%= @tab == "booking" ? "active" : "" %>" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">Bookings</a>
+    </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade <%= @tab == "profile" || @tab == nil ? "active show" : "" %> mt-3" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="row user-profile-content">
+            <div class="col-8">
+                <h3>About Me</h3>
+                <p><%= @user.description %></p>
+            </div>
+            <div class="col">
+                <h3>Education</h3>
+                <p><%= @user.education %></p>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade mt-3 <%= @tab == "booking" ? "active show" : "" %>" id="booking" role="tabpanel" aria-labelledby="booking-tab">
+      <div class="bookings">
+        <h3 class="text-center">Book this mentor!</h3>
+          <div class="booking-confirmation">
+            <%= simple_form_for [@mentor, @booking] do |f| %>
+              <%= f.input :date, as: :string, input_html: {type: :date, style: 'width: 200px'}%>
+              <%= f.input :start_time, as: :string, input_html: {type: :time, style: 'width: 200px'} %>
+              <%= f.input :end_time,  as: :string, input_html: {type: :time, style: 'width: 200px'} %>
+              <%= f.button :submit, 'Make a Booking', class: 'btn btn-primary'%>
+            <% end %>
+          </div>
+      </div>
+    </div>
+    </div>
 </div>
