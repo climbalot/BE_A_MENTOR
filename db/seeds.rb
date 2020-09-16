@@ -14,6 +14,7 @@ Mentor.destroy_all
 User.destroy_all
 Topic.destroy_all
 MentorTopic.destroy_all
+Industry.destroy_all
 p "Finished cleaning the database"
 
 # seeding industries
