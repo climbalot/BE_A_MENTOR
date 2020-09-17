@@ -1,44 +1,45 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: :home
 
-    def show
-        @user = User.find(params[:id])
-    end
-
-    def myprofile 
-      @user = current_user
-      authorize @user
-    end
-
-    def edit 
+  def show
       @user = User.find(params[:id])
-      authorize @user  
-    end
+  end
 
-    def update 
-      @user = User.find(params[:id])
-      @user.update(user_params)
-      authorize @user 
-      if @user.update(user_params)
-        redirect_to myprofile_path
-      else 
-        render 'user/edit', alert: "Your booking was unsuccessful, please try again."
-      end
-    end
+  def myprofile 
+    @user = current_user
+    authorize @user
+  end
 
-    def destroy 
-      @user = User.find(params[:id])
-      @user.destroy
-      if @user.destroy 
-        redirect_to root_path, notice: "You've successfully deleted your account."
+  def edit 
+    @user = User.find(params[:id])
+    authorize @user  
+  end
+
+  def update 
+    @user = User.find(params[:id])
+    authorize @user
+    @user.update(user_params)
+    if @user.save
+      bypass_sign_in @user
+      redirect_to myprofile_path, notice: "You've edited your profile successfully!"
     else 
-        redirect_to user_path(@user), alert: "Something went wrong!"
+      redirect_to myprofile_path, alert: "Something went wrong!"
     end
-    end
+  end
 
-    private 
+  def destroy 
+    @user = User.find(params[:id])
+    @user.destroy
+    if @user.destroy 
+      redirect_to root_path, notice: "You've successfully deleted your account."
+  else 
+      redirect_to user_path(@user), alert: "Something went wrong!"
+  end
+  end
 
-    def user_params 
-      params.require('user').permit(user: [:email, :name, :password, :job_title, :location, :industry_id, :description, :experience_years, :education])
-    end
+  private 
+
+  def user_params 
+    params.require('user').permit(:email, :name, :password, :job_title, :location, :industry_id, :description, :experience_years, :education)
+  end
 end

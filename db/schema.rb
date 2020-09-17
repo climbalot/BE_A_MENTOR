@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_16_041758) do
+ActiveRecord::Schema.define(version: 2020_09_17_055547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,12 +73,23 @@ ActiveRecord::Schema.define(version: 2020_09_16_041758) do
     t.index ["user_id"], name: "index_mentors_on_user_id"
   end
 
-  create_table "ratings", force: :cascade do |t|
+  create_table "reviews", force: :cascade do |t|
     t.integer "rating"
     t.bigint "booking_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["booking_id"], name: "index_ratings_on_booking_id"
+    t.text "testimonial"
+    t.index ["booking_id"], name: "index_reviews_on_booking_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.string "title"
+    t.datetime "start"
+    t.datetime "end"
+    t.bigint "mentor_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["mentor_id"], name: "index_schedules_on_mentor_id"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -113,6 +124,7 @@ ActiveRecord::Schema.define(version: 2020_09_16_041758) do
   add_foreign_key "mentor_topics", "mentors"
   add_foreign_key "mentor_topics", "topics"
   add_foreign_key "mentors", "users"
-  add_foreign_key "ratings", "bookings"
+  add_foreign_key "reviews", "bookings"
+  add_foreign_key "schedules", "mentors"
   add_foreign_key "users", "industries"
 end
