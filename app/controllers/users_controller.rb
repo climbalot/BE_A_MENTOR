@@ -17,12 +17,13 @@ class UsersController < ApplicationController
 
     def update 
       @user = User.find(params[:id])
+      authorize @user
       @user.update(user_params)
-      authorize @user 
-      if @user.update(user_params)
-        redirect_to myprofile_path
+      if @user.save
+        bypass_sign_in @user
+        redirect_to myprofile_path, notice: "You've edited your profile successfully!"
       else 
-        render 'user/edit', alert: "Your booking was unsuccessful, please try again."
+        redirect_to myprofile_path, alert: "Something went wrong!"
       end
     end
 
@@ -39,6 +40,6 @@ class UsersController < ApplicationController
     private 
 
     def user_params 
-      params.require('user').permit(user: [:email, :name, :password, :job_title, :location, :industry_id, :description, :experience_years, :education])
+      params.require('user').permit(:email, :name, :password, :job_title, :location, :industry_id, :description, :experience_years, :education)
     end
 end
