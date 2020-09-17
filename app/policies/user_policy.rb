@@ -6,14 +6,14 @@ class UserPolicy < ApplicationPolicy
   end
 
   def myprofile?
-    record == user 
+    record == user
   end
 
-  def update? 
-    record == user 
+  def update?
+    record == user
   end
 
   def destroy?
-    record == user 
+    record == user
   end
 end
