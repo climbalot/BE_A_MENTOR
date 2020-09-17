@@ -14,6 +14,7 @@ Mentor.destroy_all
 User.destroy_all
 Topic.destroy_all
 MentorTopic.destroy_all
+Industry.destroy_all
 p "Finished cleaning the database"
 
 # seeding industries
@@ -26,7 +27,7 @@ end
 # seeding users
 array = []
 
-50.times {
+20.times {
     user = User.new(name: Faker::Name.name,
     location: Faker::Address.country,
     industry_id: Industry.where(industry_name: industries.sample).first.id,
@@ -47,7 +48,7 @@ array = []
 
 
 # seeding Mentors
-user_array = array.sample(30)
+user_array = array.sample(15)
 
 user_array.each do |user|
     mentor = Mentor.new(user_id: user.id, hourly_rate: Faker::Number.between(from: 20, to: 100))

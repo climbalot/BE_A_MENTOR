@@ -4,9 +4,6 @@
     <p>Change your life and learn by meeting a mentor from somewhere around the world.</p>
   </div>
 </div>
-<% if user_signed_in? %>
-<%= current_user.email %>
-<% end %>
 <div class="container d-flex align-items-center" id="filter-bar">
   <%= render 'filter_bar' %>
 </div>
@@ -16,12 +13,12 @@
 <div class="container text-center">
   <div class="cards">
     <% @mentors.each do |mentor| %>
-    <%= link_to mentor_path(mentor) do %>
+    <%= link_to mentor_path(mentor), class: "text-decoration-none" do %>
     <div class="card" style="width: 18rem;">
       <%= cl_image_tag mentor.user.photo.key, class: "card-img-top card-img", alt: "profile_img" %>
       <div class="card-body text-left">
         <h5 class="card-title"><%= mentor.user.name %></h5>
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-end">
           <h6 class="text-muted"><%= mentor.user.job_title %></h6>
           <h6><strong>$<%= mentor.hourly_rate %>/hr</strong></h6>
         </div>

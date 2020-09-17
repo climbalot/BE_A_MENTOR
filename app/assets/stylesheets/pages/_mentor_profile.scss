@@ -7,3 +7,28 @@
   width: fit-content;
   margin: auto;
 }
+
+.profile h3 {
+  font-size: 24px;
+}
+
+.profile h4, h5 {
+  font-size: 16px;
+}
+
+.nav-link {
+  color: #026670;
+}
+
+.nav-tabs {
+  border-color: #026670;
+}
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+  border-color: #026670;
+  border-bottom-color: transparent;
+}
+
+.nav-tabs {
+  border-bottom-color: #026670;
+}

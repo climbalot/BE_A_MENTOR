@@ -1,0 +1,57 @@
+<div class="container-fluid d-flex align-items-center user-profile-top">
+    <div class="container pt-4 d-flex justify-content-left align-items-center">
+        <div class="description-wrapper mr-3">
+            <% if @user.photo.attached? %>
+              <%= cl_image_tag @user.photo.key, class: "avatar-large", alt: "avatar-large" %>
+            <% else %>
+              <%= cl_image_tag("https://iupac.org/wp-content/uploads/2018/05/default-avatar.png", class: "avatar-large", alt: "avatar-large") %>
+            <% end %>
+        </div>
+        <div class="profile ml-4">
+            <h3><%= @user.name %></h3>
+            <h4 class="text-muted"><%= @user.job_title %></h4>
+            <h5>Has been working in the <strong><%= @user.industry.industry_name %></strong> industry for <strong>
+            <%= @user.experience_years ? @user.experience_years : '0' %></strong> year(s)</h5>
+            <i class="fas fa-map-marker-alt"></i> <%= @user.location %>
+            <p><%= link_to "Edit your profile", edit_user_path(@user), class: "btn btn-primary" %>
+            <%= link_to "Delete this account",
+                    user_path(@user),
+                    method: :delete,
+                    class: "btn btn-danger",
+                    data: { confirm: "Are you sure?" } %>
+        </div>
+        
+    </div>
+</div>
+
+<div class="container pt-4">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link <%= @tab == "mybookings" || @tab == nil ? "active" : "" %>" id="mybookings-tab" data-toggle="tab" href="#mybookings" role="tab" aria-controls="mybookings" aria-selected="true">My Bookings</a>
+        </li>
+    </ul>
+    <div class="tab-content mb-5" id="myTabContent">
+    <div class="tab-pane fade <%= @tab == "mybookings" || @tab == nil ? "active show" : "" %> mt-3" id="mybookings" role="tabpanel" aria-labelledby="mybookings-tab">
+        <% if @user.booking_ids.empty? %>
+            <p>You have no bookings yet.</p>
+        <% else %>
+            <% @user.bookings.each do |booking| %>
+                <div class="row user-profile-content mt-4 align-items-center" id="booking">
+                  <div class="col-4">
+                    <%= cl_image_tag booking.mentor.user.photo.key, crop: :fill, class: "avatar-large", alt: "avatar-large" %>
+                  </div>
+                  <div class="col align-items-center">
+                    <h4><%= booking.mentor.user.name %></h4>
+                    <h5><%= booking.mentor.user.job_title %></h5>
+                    <i class="fas fa-map-marker-alt"></i> <%= booking.mentor.user.location %>
+                    <p>Your booking with <%= booking.mentor.user.name %> is on 
+                        <strong>
+                            <%= booking.date.strftime("%d %B %Y, %A") %>, <%= booking.start_time.hour %>:<%= booking.start_time.min %></p>
+                        </strong>
+                  </div>
+                </div>
+                <% end %>
+            <% end %>
+    </div>
+    </div>
+</div>
