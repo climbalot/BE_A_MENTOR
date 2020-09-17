@@ -4,8 +4,16 @@ class PagesController < ApplicationController
   
   def home
     @mentors = Mentor.all
-  end
+    if params[:country].present?
+      @mentors = @mentors.joins(:user).where(users: {location: params[:country]})
+    end
 
-  def filter 
+    if params[:industry].present?
+      @mentors = @mentors.joins(user: :industry).where(industries: {industry_name: params[:industry]})
+    end
+
+    if params[:topic].present?
+      @mentors = @mentors.joins(mentor_topics: :topic).where(topics: {name: params[:topic]})
+    end
   end
 end

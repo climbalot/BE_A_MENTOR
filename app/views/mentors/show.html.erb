@@ -21,7 +21,7 @@
       <a class="nav-link <%= @tab == "booking" ? "active" : "" %>" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">Bookings</a>
     </li>
     <li class="nav-item" role="presentation">
-      <a class="nav-link <%= @tab == "booking" ? "active" : "" %>" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">Bookings</a>
+      <a class="nav-link <%= @tab == "reviews" || @tab == nil ? "" : "" %>" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="true">Reviews</a>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
@@ -50,5 +50,29 @@
         </div>
       </div>
     </div>
+    <div class="tab-pane fade <%= @tab == "review" || @tab == nil ? "active show" : "" %> mt-3" id="review" role="tabpanel" aria-labelledby="review-tab">
+      <div class="row user-review-content">
+        <div class="col-8">
+          <h3>Reviews</h3>
+          <div>
+            <div class="card-review mb-3" style="max-width: 1200px;"";height: fit-content;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="https://kitt.lewagon.com/placeholder/users/random" class="avatar-large" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+</div>
 </div>
