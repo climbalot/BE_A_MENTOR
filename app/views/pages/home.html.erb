@@ -16,7 +16,11 @@
     <% @mentors.each do |mentor| %>
       <%= link_to mentor_path(mentor), class: "text-decoration-none" do %>
       <div class="card" style="width: 18rem;">
-        <%= cl_image_tag mentor.user.photo.key, class: "card-img-top card-img", alt: "profile_img" %>
+        <% if mentor.user.photo.attached? %>
+          <%= cl_image_tag mentor.user.photo.key, class: "card-img-top card-img", alt: "profile_img" %>
+        <% else %>
+          <%= cl_image_tag("https://iupac.org/wp-content/uploads/2018/05/default-avatar.png") %>
+        <% end %>
         <div class="card-body text-left">
           <h5 class="card-title"><%= mentor.user.name %></h5>
           <div class="d-flex justify-content-between align-items-end">
