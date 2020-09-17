@@ -7,7 +7,6 @@ class MentorsController < ApplicationController
     @user = @mentor.user
     @booking = Booking.new
     @tab = params[:tab]
-    @reviews = Review.where(params[:mentor_id]==@mentor)
   end
 
   def new
