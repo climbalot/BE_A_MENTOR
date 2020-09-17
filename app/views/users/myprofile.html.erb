@@ -8,7 +8,8 @@
             <% end %>
         </div>
         <div class="profile ml-4">
-            <h3><%= @user.name %></h3>
+            <h3><%= Mentor.exists?(user_id: @user.id) ? "#{@user.name} (Mentor)" : @user.name %></h3>
+            <%= Mentor.exists?(user_id: @user.id) ? "Your hourly rate: $#{Mentor.find_by(user_id: @user.id).hourly_rate}" : '' %>
             <h4 class="text-muted"><%= @user.job_title %></h4>
             <h5>Has been working in the <strong><%= @user.industry.industry_name %></strong> industry for <strong>
             <%= @user.experience_years ? @user.experience_years : '0' %></strong> year(s)</h5>
