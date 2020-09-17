@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <%= simple_form_for(@mentor) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :hourly_rate,
+        required: true,
+        autofocus: true %>
+      </div>
+      <div class="form-actions">
+        <%= f.button :submit, "Become a mentor!", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

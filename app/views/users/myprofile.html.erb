@@ -8,7 +8,8 @@
             <% end %>
         </div>
         <div class="profile ml-4">
-            <h3><%= @user.name %></h3>
+            <h3><%= Mentor.exists?(user_id: @user.id) ? "#{@user.name} (Mentor)" : @user.name %></h3>
+            <%= Mentor.exists?(user_id: @user.id) ? "Your hourly rate: $#{Mentor.find_by(user_id: @user.id).hourly_rate}" : '' %>
             <h4 class="text-muted"><%= @user.job_title %></h4>
             <h5>Has been working in the <strong><%= @user.industry.industry_name %></strong> industry for <strong>
             <%= @user.experience_years ? @user.experience_years : '0' %></strong> year(s)</h5>
@@ -20,7 +21,7 @@
                     class: "btn btn-danger",
                     data: { confirm: "Are you sure?" } %>
         </div>
-        
+
     </div>
 </div>
 
@@ -44,10 +45,11 @@
                     <h4><%= booking.mentor.user.name %></h4>
                     <h5><%= booking.mentor.user.job_title %></h5>
                     <i class="fas fa-map-marker-alt"></i> <%= booking.mentor.user.location %>
-                    <p>Your booking with <%= booking.mentor.user.name %> is on 
+                    <p>Your booking with <%= booking.mentor.user.name %> is on
                         <strong>
                             <%= booking.date.strftime("%d %B %Y, %A") %>, <%= booking.start_time.hour %>:<%= booking.start_time.min %></p>
                         </strong>
+                      <%= link_to "Leave a Review", new_booking_review_path(booking), class: "btn btn-secondary" %>
                   </div>
                 </div>
                 <% end %>
