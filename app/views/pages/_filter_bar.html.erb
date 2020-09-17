@@ -1,11 +1,14 @@
-<div class="container d-flex justify-content-between" id="filter-wrapper">
-  <select class="country-select2" name="country">
-    <option></option>
-  </select>
-  <select class="industry-select2" name="industry">
-    <option></option>
-  </select>
-  <select class="topic-select2" name="topic">
-    <option></option>
-  </select>
-</div>
+<%= simple_form_for :mentors, url: root_path, method: :get do |f| %>
+  <div class="container d-flex justify-content-between" id="filter-wrapper">
+    <select class="country-select2" name="country">
+      <option></option>
+    </select>
+    <select class="industry-select2" name="industry">
+      <option></option>
+    </select>
+    <select class="topic-select2" name="topic">
+      <option></option>
+    </select>
+    <%= f.button :submit, "Search", class: "btn btn-primary" %>
+  </div>
+<% end %>

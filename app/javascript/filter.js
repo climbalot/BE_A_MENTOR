@@ -1,3 +1,0 @@
-const filter = () => {
-    document.querySelector("")
-}
