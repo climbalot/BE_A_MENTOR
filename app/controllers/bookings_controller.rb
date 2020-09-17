@@ -7,28 +7,28 @@ class BookingsController < ApplicationController
         @price = (@mentor.hourly_rate / 60) * @duration
         @booking = Booking.new(booking_params)
         @booking.user = current_user
-        @booking.mentor = @mentor 
-        @booking.duration_in_minutes = @duration 
+        @booking.mentor = @mentor
+        @booking.duration_in_minutes = @duration
         @booking.total_price = @price
-            # user_id: @user.id, 
-            # mentor_id: @mentor.id, 
-            # duration_in_minutes: @duration, 
+            # user_id: @user.id,
+            # mentor_id: @mentor.id,
+            # duration_in_minutes: @duration,
             # total_price: @price)
         @booking.save if @duration > 0
 
-        if @booking.save 
-            redirect_to mentor_path(@mentor, tab: 'booking'), notice: "You've successfully made a booking!"
-        else 
-            redirect_to mentor_path(@mentor, tab: 'booking'), alert: "Your booking was unsuccessful, please try again."
+        if @booking.save
+          redirect_to mentor_path(@mentor, tab: 'booking'), notice: "You've successfully made a booking!"
+        else
+          redirect_to mentor_path(@mentor, tab: 'booking'), alert: "Your booking was unsuccessful, please try again."
         end
 
         # verification
         authorize @booking
     end
 
-    private 
+    private
 
-    def booking_params 
+    def booking_params
         params.require(:booking).permit(:date, :start_time, :end_time)
     end
 
