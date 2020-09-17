@@ -21,7 +21,7 @@
                     class: "btn btn-danger",
                     data: { confirm: "Are you sure?" } %>
         </div>
-        
+
     </div>
 </div>
 
@@ -45,10 +45,11 @@
                     <h4><%= booking.mentor.user.name %></h4>
                     <h5><%= booking.mentor.user.job_title %></h5>
                     <i class="fas fa-map-marker-alt"></i> <%= booking.mentor.user.location %>
-                    <p>Your booking with <%= booking.mentor.user.name %> is on 
+                    <p>Your booking with <%= booking.mentor.user.name %> is on
                         <strong>
                             <%= booking.date.strftime("%d %B %Y, %A") %>, <%= booking.start_time.hour %>:<%= booking.start_time.min %></p>
                         </strong>
+                      <%= link_to "Leave a Review", new_booking_review_path(booking), class: "btn btn-secondary" %>
                   </div>
                 </div>
                 <% end %>

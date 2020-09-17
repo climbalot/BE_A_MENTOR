@@ -1,4 +1,4 @@
-class BookingPolicy < ApplicationPolicy
+class ReviewPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
@@ -6,10 +6,6 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def create?
-    true
-  end
-
-  def new?
-    record.user == user
+    record.booking.user == user
   end
 end

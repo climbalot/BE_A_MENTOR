@@ -5,7 +5,7 @@ class MentorsController < ApplicationController
   def show
     @mentor = Mentor.find(params[:id])
     @user = @mentor.user
-    @booking = Booking.new 
+    @booking = Booking.new
     @tab = params[:tab]
   end
 
@@ -13,22 +13,22 @@ class MentorsController < ApplicationController
     @mentor = Mentor.new
   end
 
-  def create 
+  def create
     @mentor = Mentor.new(mentor_params)
     @mentor.user_id = current_user.id
     authorize @mentor
-    @mentor.save 
+    @mentor.save
 
-    if @mentor.save 
+    if @mentor.save
       redirect_to myprofile_path(current_user), notice: "You're a mentor now!"
-    else 
+    else
       redirect_to :back, alert: "Something went wrong!"
     end
-  end 
+  end
 
-  private 
+  private
 
   def mentor_params
-    params.require(:mentor).permit(:hourly_rate) 
+    params.require(:mentor).permit(:hourly_rate)
   end
 end
