@@ -14,6 +14,11 @@
         <%# <li class="nav-item active">
           <%= link_to "Home", "#", class: "nav-link btn btn-primary" %>
         <%# </li> %>
+        <% if Mentor.exists?(user_id: current_user.id) == false %>
+        <li>
+          <%= link_to 'Become a Mentor', new_mentor_path, class: "btn btn-primary" %>
+        </li>
+        <% end %>
         <li class="nav-item dropdown">
           <%= link_to myprofile_path do %>
             <% if current_user.photo.attached? %>

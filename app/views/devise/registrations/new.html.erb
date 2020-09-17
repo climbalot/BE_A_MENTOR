@@ -24,7 +24,7 @@
         <%= f.input :job_title,
         required: true,
         input_html: { autocomplete: "job title" } %>
-        <%= f.input :location,
+        <%= f.input :location, collection: User::COUNTRIES,
         required: true,
         input_html: { autocomplete: "location" } %>
         <%= f.association :industry,
