@@ -1,51 +1,54 @@
 <div class="container-fluid d-flex align-items-center user-profile-top">
-    <div class="container pt-4 d-flex justify-content-left align-items-center">
-        <div class="description-wrapper mr-3">
-            <%= cl_image_tag @mentor.user.photo.key, crop: :fill, class: "avatar-large", alt: "avatar-large" %>
-        </div>
-        <div class="profile ml-4">
-            <h3><%= @user.name %></h3>
-            <h4 class="text-muted"><%= @user.job_title %></h4>
-            <h5>Has been working in the <strong><%= @user.industry.industry_name %></strong> industry for <strong><%= @user.experience_years %></strong> year(s)</h5>
-            <i class="fas fa-map-marker-alt"></i> <%= @user.location %>
-        </div>
+  <div class="container pt-4 d-flex justify-content-left align-items-center">
+    <div class="description-wrapper mr-3">
+      <%= cl_image_tag @mentor.user.photo.key, crop: :fill, class: "avatar-large", alt: "avatar-large" %>
     </div>
+    <div class="profile ml-4">
+      <h3><%= @user.name %></h3>
+      <h4 class="text-muted"><%= @user.job_title %></h4>
+      <h5>Has been working in the <strong><%= @user.industry.industry_name %></strong> industry for <strong><%= @user.experience_years %></strong> year(s)</h5>
+      <i class="fas fa-map-marker-alt"></i> <%= @user.location %>
+    </div>
+  </div>
 </div>
 
 <div class="container pt-4">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <a class="nav-link <%= @tab == "profile" || @tab == nil ? "active" : "" %>" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link <%= @tab == "booking" ? "active" : "" %>" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">Bookings</a>
-        </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link <%= @tab == "profile" || @tab == nil ? "active" : "" %>" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link <%= @tab == "booking" ? "active" : "" %>" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">Bookings</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link <%= @tab == "booking" ? "active" : "" %>" id="booking-tab" data-toggle="tab" href="#booking" role="tab" aria-controls="booking" aria-selected="false">Bookings</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade <%= @tab == "profile" || @tab == nil ? "active show" : "" %> mt-3" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <div class="row user-profile-content">
-            <div class="col-8">
-                <h3>About Me</h3>
-                <p><%= @user.description %></p>
-            </div>
-            <div class="col">
-                <h3>Education</h3>
-                <p><%= @user.education %></p>
-            </div>
+      <div class="row user-profile-content">
+        <div class="col-8">
+          <h3>About Me</h3>
+          <p><%= @user.description %></p>
         </div>
+        <div class="col">
+          <h3>Education</h3>
+          <p><%= @user.education %></p>
+        </div>
+      </div>
     </div>
     <div class="tab-pane fade mt-3 <%= @tab == "booking" ? "active show" : "" %>" id="booking" role="tabpanel" aria-labelledby="booking-tab">
       <div class="bookings">
         <h3 class="text-center">Book this mentor!</h3>
-          <div class="booking-confirmation">
-            <%= simple_form_for [@mentor, @booking] do |f| %>
-              <%= f.input :date, as: :string, input_html: {type: :date, style: 'width: 200px'}%>
-              <%= f.input :start_time, as: :string, input_html: {type: :time, style: 'width: 200px'} %>
-              <%= f.input :end_time,  as: :string, input_html: {type: :time, style: 'width: 200px'} %>
-              <%= f.button :submit, 'Make a Booking', class: 'btn btn-primary'%>
-            <% end %>
-          </div>
+        <div class="booking-confirmation">
+          <%= simple_form_for [@mentor, @booking] do |f| %>
+          <%= f.input :date, as: :string, input_html: {type: :date, style: 'width: 200px'}%>
+          <%= f.input :start_time, as: :string, input_html: {type: :time, style: 'width: 200px'} %>
+          <%= f.input :end_time,  as: :string, input_html: {type: :time, style: 'width: 200px'} %>
+          <%= f.button :submit, 'Make a Booking', class: 'btn btn-primary'%>
+          <% end %>
+        </div>
       </div>
     </div>
-    </div>
+  </div>
 </div>
