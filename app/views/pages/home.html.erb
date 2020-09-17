@@ -8,23 +8,25 @@
   <%= render 'filter_bar' %>
 </div>
 
-<h2 class="text-center">Meet your mentors!</h2>
-
 <div class="container text-center">
+  <% if @mentors.empty? %>
+  <p>Sorry, we don't have a mentor you're looking for yet!</p>
+  <% else %>
   <div class="cards">
     <% @mentors.each do |mentor| %>
-    <%= link_to mentor_path(mentor), class: "text-decoration-none" do %>
-    <div class="card" style="width: 18rem;">
-      <%= cl_image_tag mentor.user.photo.key, class: "card-img-top card-img", alt: "profile_img" %>
-      <div class="card-body text-left">
-        <h5 class="card-title"><%= mentor.user.name %></h5>
-        <div class="d-flex justify-content-between align-items-end">
-          <h6 class="text-muted"><%= mentor.user.job_title %></h6>
-          <h6><strong>$<%= mentor.hourly_rate %>/hr</strong></h6>
+      <%= link_to mentor_path(mentor), class: "text-decoration-none" do %>
+      <div class="card" style="width: 18rem;">
+        <%= cl_image_tag mentor.user.photo.key, class: "card-img-top card-img", alt: "profile_img" %>
+        <div class="card-body text-left">
+          <h5 class="card-title"><%= mentor.user.name %></h5>
+          <div class="d-flex justify-content-between align-items-end">
+            <h6 class="text-muted"><%= mentor.user.job_title %></h6>
+            <h6><strong>$<%= mentor.hourly_rate %>/hr</strong></h6>
+          </div>
         </div>
       </div>
-    </div>
+      <% end %>
     <% end %>
-    <% end %>
+  <% end %>
   </div>
 </div>
