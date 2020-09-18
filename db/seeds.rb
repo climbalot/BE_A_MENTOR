@@ -8,6 +8,7 @@
 
 require 'faker'
 require 'open-uri'
+require 'pry-byebug'
 
 # clean up db
 Mentor.destroy_all
@@ -27,7 +28,7 @@ end
 # seeding users
 array = []
 
-20.times {
+40.times {
     user = User.new(name: Faker::Name.name,
     location: Faker::Address.country,
     industry_id: Industry.where(industry_name: industries.sample).first.id,
@@ -36,7 +37,7 @@ array = []
     experience_years: Faker::Number.between(from: 1, to: 10),
     job_title: Faker::Job.title,
     email: Faker::Internet.email,
-    password: Faker::Internet.password,)
+    password: '123123',)
     file = URI.open("https://kitt.lewagon.com/placeholder/users/random")
     user.photo.attach(io: file, filename: 'avatar.png')
     user.save!
@@ -48,7 +49,7 @@ array = []
 
 
 # seeding Mentors
-user_array = array.sample(15)
+user_array = array.sample(35)
 
 user_array.each do |user|
     mentor = Mentor.new(user_id: user.id, hourly_rate: Faker::Number.between(from: 20, to: 100))
@@ -61,3 +62,15 @@ Topic::TOPICS.each do |topic|
     Topic.create(name: topic)
 end
 p "Created all topics"
+
+# seeding Mentor Topics
+mentors = Mentor.all 
+
+mentors.sample(20).each do |mentor|
+  topic = Topic.find_by(name: Topic::TOPICS.sample)
+  MentorTopic.create(mentor_id: mentor.id, topic_id:  topic.id)
+  p "Mentor #{mentor.user.name} now has the topic #{topic.name}"
+  topic = Topic.find_by(name: Topic::TOPICS.sample)
+  MentorTopic.create(mentor_id: mentor.id, topic_id:  topic.id)
+  p "Mentor #{mentor.user.name} now has the topic #{topic.name}"
+end

@@ -1,5 +1,6 @@
 class MentorsController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
+  skip_after_action :authenticate_user!, only: :destroy, :raise => false
   skip_after_action :verify_authorized, only: [:new]
 
   def show
@@ -30,6 +31,17 @@ class MentorsController < ApplicationController
       redirect_to myprofile_path(current_user), notice: "You're a mentor now!"
     else
       redirect_to :back, alert: "Something went wrong!"
+    end
+  end
+
+  def destroy 
+    @mentor = Mentor.find(params[:id])
+    authorize @mentor
+    @mentor.destroy
+    if @mentor.destroy 
+      redirect_to root_path, notice: "You've successfully deleted your account."
+    else 
+      redirect_to user_path(@mentor.user), alert: "Something went wrong!"
     end
   end
 

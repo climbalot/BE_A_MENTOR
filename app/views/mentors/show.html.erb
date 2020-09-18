@@ -50,14 +50,19 @@
         </div>
       </div>
     </div>
-    <div class="tab-pane fade <%= @tab == "reviews" || @tab == nil ? "active show" : "" %> mt-3" id="review" role="tabpanel" aria-labelledby="reviews-tab">
+    <div class="tab-pane fade <%= @tab == "reviews" || @tab == 'reviews' ? "active show" : "" %> mt-3" id="review" role="tabpanel" aria-labelledby="reviews-tab">
       <% if @mentor.reviews.empty? %>
       <p>This mentor has no review yet.</p>
       <% else %>
       <% @mentor.reviews.each do |review| %>
       <div class="row user-profile-content mt-4 align-items-center" id="reviews">
         <div class="col-4">
-          <%= cl_image_tag @mentor.user.photo.key, crop: :fill, class: "avatar-large", alt: "avatar-large" %>
+          <% if review.booking.user.photo.attached? == false %>
+            <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" class="avatar-large" alt="avatar-large">
+          <% else %>
+            <%= cl_image_tag review.booking.user.photo.key, crop: :fill, class: "avatar-large", alt: "avatar-large" %>
+         <% end %>
+
         </div>
         <div class="col align-items-center">
           <h4><%= review.booking.user.name %></h4>

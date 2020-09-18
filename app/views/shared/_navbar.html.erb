@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <i class="fas fa-chalkboard-teacher"></i>
+    <img src="https://files.slack.com/files-pri/T02NE0241-F01AH9EPWG7/logo.png" alt="">
   <% end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,19 +19,14 @@
           <%= link_to 'Become a Mentor', new_mentor_path, class: "btn btn-primary" %>
         </li>
         <% end %>
-        <li class="nav-item dropdown">
+        <li class="nav-item">
           <%= link_to myprofile_path do %>
             <% if current_user.photo.attached? %>
-              <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <%= cl_image_tag current_user.photo.key, class: "avatar"%>
             <% else %>
               <%= cl_image_tag("https://iupac.org/wp-content/uploads/2018/05/default-avatar.png", width: 42, height: 42) %>
             <% end %>
           <% end %>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Action", "#", class: "dropdown-item" %>
-            <%= link_to "Another action", "#", class: "dropdown-item" %>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-          </div>
         </li>
       <% else %>
         <li class="nav-item">
