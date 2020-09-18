@@ -15,11 +15,19 @@
             <%= @user.experience_years ? @user.experience_years : '0' %></strong> year(s)</h5>
             <i class="fas fa-map-marker-alt"></i> <%= @user.location %>
             <p><%= link_to "Edit your profile", edit_user_path(@user), class: "btn btn-primary" %>
-            <%= link_to "Delete this account",
-                    user_path(@user),
-                    method: :delete,
-                    class: "btn btn-danger",
-                    data: { confirm: "Are you sure?" } %>
+            <% if Mentor.exists?(user_id: @user.id) %>
+                <%= link_to "Delete this account",
+                        mentor_path(Mentor.find_by(user_id: @user.id)),
+                        method: :delete,
+                        class: "btn btn-danger",
+                        data: { confirm: "Are you sure?" } %>
+            <% else %>
+                <%= link_to "Delete this account",
+                        mentor_path(@user),
+                        method: :delete,
+                        class: "btn btn-danger",
+                        data: { confirm: "Are you sure?" } %>
+            <% end %>
         </div>
 
     </div>

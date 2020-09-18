@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     end
 
     if params[:topic].present?
-      @mentors = @mentors.joins(mentor_topics: :topic).where(topics: {name: params[:topic]})
+      @mentors = @mentors.joins(mentor_topics: :topic).where(topics: {name: params[:topic]}).uniq()
     end
   end
 end
