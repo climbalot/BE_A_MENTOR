@@ -1,8 +1,10 @@
+<div class="container mt-5">
 <H1>Write in your testimonial</H1>
-<h2>for your <placeholder>  <%= @booking.mentor.user.name %> </h2>
+<h2>for <%= @booking.mentor.user.name %> </h2>
 
 <%= simple_form_for [@booking, @review] do |f| %>
   <%= f.input :testimonial, input_html: { maxlength: 500 } %>
   <%= f.input :rating, collection: 1..5 %>
   <%= f.submit "leave your review" %>
  <% end %>
+</div>
