@@ -57,8 +57,7 @@ user_array.each do |user|
 end
 
 # seeding Topics
-Topic.create(name: 'General')
-Topic.create(name: 'Work culture')
-Topic.create(name: 'Technical Questions')
-Topic.create(name: 'Learning')
+Topic::TOPICS.each do |topic|
+    Topic.create(name: topic)
+end
 p "Created all topics"

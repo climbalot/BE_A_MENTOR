@@ -18,6 +18,13 @@ class MentorsController < ApplicationController
     @mentor.user_id = current_user.id
     authorize @mentor
     @mentor.save
+    mentor_topic_params[:mentor_topics].each do |topic|
+      if topic.blank? == false 
+        @topic = Topic.find_by(name: topic)
+        @mentor_topic = MentorTopic.new(mentor_id: @mentor.id, topic_id: @topic.id)
+        @mentor_topic.save
+      end
+    end
 
     if @mentor.save
       redirect_to myprofile_path(current_user), notice: "You're a mentor now!"
@@ -30,5 +37,9 @@ class MentorsController < ApplicationController
 
   def mentor_params
     params.require(:mentor).permit(:hourly_rate)
+  end
+
+  def mentor_topic_params
+    params.require(:mentor).permit(:mentor_topics => [])
   end
 end
