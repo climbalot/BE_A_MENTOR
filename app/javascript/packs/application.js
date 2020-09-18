@@ -32,5 +32,8 @@ import { initSelect2 } from '../plugins/init_select2';
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-  initSelect2();
+  const selectTwoForm = document.querySelector(".simple_form.mentors");
+  if (!selectTwoForm.classList.contains('select2-applied')) {
+    initSelect2();
+  }
 });
