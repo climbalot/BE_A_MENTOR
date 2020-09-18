@@ -49,7 +49,11 @@
                         <strong>
                             <%= booking.date.strftime("%d %B %Y, %A") %>, <%= booking.start_time.hour %>:<%= booking.start_time.min %></p>
                         </strong>
+                        <% if booking.review.blank? %>
                       <%= link_to "Leave a Review", new_booking_review_path(booking), class: "btn btn-secondary" %>
+                      <% else %>
+                       <h5>You have left a review!</h5>
+                      <% end %>
                   </div>
                 </div>
                 <% end %>
