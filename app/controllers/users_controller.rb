@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: :home
+  skip_after_action :authenticate_user!, only: :destroy, :raise => false
 
   def show
       @user = User.find(params[:id])
@@ -32,9 +33,9 @@ class UsersController < ApplicationController
     @user.destroy
     if @user.destroy 
       redirect_to root_path, notice: "You've successfully deleted your account."
-  else 
+    else 
       redirect_to user_path(@user), alert: "Something went wrong!"
-  end
+    end
   end
 
   private 
