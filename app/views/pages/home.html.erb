@@ -19,7 +19,7 @@
         <% if mentor.user.photo.attached? %>
           <%= cl_image_tag mentor.user.photo.key, class: "card-img-top card-img", alt: "profile_img" %>
         <% else %>
-          <%= cl_image_tag("https://iupac.org/wp-content/uploads/2018/05/default-avatar.png") %>
+          <%= cl_image_tag("https://iupac.org/wp-content/uploads/2018/05/default-avatar.png", class: "card-img-top card-img") %>
         <% end %>
         <div class="card-body text-left">
           <h5 class="card-title"><%= mentor.user.name %></h5>
