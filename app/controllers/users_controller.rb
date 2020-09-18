@@ -30,6 +30,7 @@ class UsersController < ApplicationController
 
   def destroy 
     @user = User.find(params[:id])
+    authorize @user
     @user.destroy
     if @user.destroy 
       redirect_to root_path, notice: "You've successfully deleted your account."
@@ -41,6 +42,6 @@ class UsersController < ApplicationController
   private 
 
   def user_params 
-    params.require('user').permit(:email, :name, :password, :job_title, :location, :industry_id, :description, :experience_years, :education)
+    params.require('user').permit(:email, :name, :password, :job_title, :location, :industry_id, :description, :experience_years, :education, :photo)
   end
 end
