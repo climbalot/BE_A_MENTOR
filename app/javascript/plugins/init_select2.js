@@ -284,6 +284,8 @@ const initSelect2 = () => {
         placeholder: "Select a topic",
         width: '200px'
     });
+
+    $('.simple_form').addClass('select2-applied');
 };
 
 export { initSelect2 };
