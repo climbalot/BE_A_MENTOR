@@ -249,13 +249,13 @@ const initSelect2 = () => {
         { id: 'Zambia', text: 'Zambia'},
         { id: 'Zimbabwe', text: 'Zimbabwe'}
     ];
-    
+
     $(".country-select2").select2({
         data: countryList,
         placeholder: "Select a country",
         width: '200px'
     });
-    
+
     const industries = [
         { id: 'Agriculture', text: 'Agriculture'},
         { id: 'Arts, Entertainment and Recreation', text: 'Arts, Entertainment and Recreation'},
@@ -265,20 +265,20 @@ const initSelect2 = () => {
         { id: 'Manufacturing', text: 'Manufacturing'},
         { id: 'Transportation', text: 'Transportation'}
     ];
-    
+
     $(".industry-select2").select2({
         data: industries,
         placeholder: "Select an industry",
         width: '200px'
     });
-    
+
     const topics = [
         { id: 'General', text: 'General'},
         { id: 'Work culture', text: 'Work culture'},
         { id: 'Technical Questions', text: 'Technical Questions'},
         { id: 'Learning', text: 'Learning'}
     ];
-    
+
     $(".topic-select2").select2({
         data: topics,
         placeholder: "Select a topic",
