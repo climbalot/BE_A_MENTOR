@@ -20,7 +20,7 @@ class MentorsController < ApplicationController
     authorize @mentor
     @mentor.save
     mentor_topic_params[:mentor_topics].each do |topic|
-      if topic.blank? == false 
+      if topic.blank? == false
         @topic = Topic.find_by(name: topic)
         @mentor_topic = MentorTopic.new(mentor_id: @mentor.id, topic_id: @topic.id)
         @mentor_topic.save
